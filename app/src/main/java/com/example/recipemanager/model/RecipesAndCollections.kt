@@ -19,28 +19,20 @@ data class RecipeCollection(
     val title: String
 )
 
-@Entity(primaryKeys = ["recipeId","collectionId"])
-data class CollectionRecipeCrossRef(
+@Entity(primaryKeys = ["recipeId","collectionId"], foreignKeys = [
+    ForeignKey(
+        entity = Recipe::class,
+        parentColumns = ["recipeId"],
+        childColumns = ["recipeId"],
+        onDelete = ForeignKey.CASCADE
+    ),
+    ForeignKey(
+        entity = RecipeCollection::class,
+        parentColumns = ["collectionId"],
+        childColumns = ["collectionId"],
+        onDelete = ForeignKey.CASCADE
+    )])
+data class RecipeInCollection(
     val recipeId: Long,
     val collectionId: Long
-)
-
-data class CollectionWithRecipes(
-    @Embedded
-    val collection: RecipeCollection,
-    @Relation(parentColumn = "collectionId",
-        entityColumn = "recipeId",
-        associateBy = Junction(CollectionRecipeCrossRef::class)
-    )
-    val recipes: List<Recipe>
-)
-
-data class RecipesWithCollections(
-    @Embedded
-    val Recipe: Recipe,
-    @Relation(parentColumn = "recipeId",
-        entityColumn = "collectionId",
-        associateBy = Junction(CollectionRecipeCrossRef::class)
-    )
-    val collections: List<RecipeCollection>
 )

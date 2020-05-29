@@ -6,8 +6,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
+import com.example.recipemanager.model.RecipeInCollection
 
-@Database(entities = [Recipe::class, RecipeCollection::class], version = 1, exportSchema = false)
+@Database(entities = [Recipe::class, RecipeCollection::class, RecipeInCollection::class], version = 1, exportSchema = false)
 abstract class RecipeDatabase : RoomDatabase() {
 
     abstract fun recipeDao(): RecipesDAO

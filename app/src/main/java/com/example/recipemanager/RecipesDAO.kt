@@ -7,11 +7,9 @@ import com.example.recipemanager.model.RecipeCollection
 
 @Dao
 interface RecipesDAO {
+    //RECIPES
     @Query("SELECT * FROM Recipe")
     fun getAllRecipes(): LiveData<List<Recipe>>
-
-    //@Query("SELECT * FROM recipe WHERE recipeId=:id")
-    //fun getRecipe(id: Int): LiveData<Recipe>
 
     @Insert
     suspend fun insertRecipe(recipe: Recipe)
@@ -22,11 +20,9 @@ interface RecipesDAO {
     @Update
     suspend fun updateRecipe(recipe: Recipe)
 
+    //COLLECTIONS
     @Query("SELECT * FROM RecipeCollection")
     fun getAllCollections(): LiveData<List<RecipeCollection>>
-
-    //@Query("SELECT * FROM RecipeCollection WHERE collectionId=:id")
-    //fun getCollection(id: Int): LiveData<RecipeCollection>
 
     @Insert
     suspend fun insertCollection(collection: RecipeCollection)
@@ -37,7 +33,11 @@ interface RecipesDAO {
     @Update
     suspend fun updateCollection(collection: RecipeCollection)
 
-    @Transaction
-    @Query("SELECT * FROM recipecollection WHERE collectionId=:id")
-    fun getCollectionWithRecipes(id: Int): LiveData<List<RecipeCollection>>
+    //RECIPES IN COLLECTIONS
+    @Query("""
+        SELECT * FROM recipeincollection
+        INNER JOIN recipe ON recipe.recipeId = recipeincollection.recipeId
+        WHERE recipeincollection.collectionId = :collectionId
+        """)
+    fun getRecipesInCollection(collectionId: Long): LiveData<List<Recipe>>
 }
