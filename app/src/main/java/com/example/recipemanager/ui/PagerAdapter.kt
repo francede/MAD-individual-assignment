@@ -11,9 +11,9 @@ class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
     override fun createFragment(position: Int): Fragment {
         // Return a NEW fragment instance in createFragment(int)
         return when(position) {
-            0 -> RecipeFragment()
+            0 -> RecipesFragment()
             1 -> CollectionFragment()
-            else -> RecipeFragment()
+            else -> RecipesFragment()
         }
     }
 }
