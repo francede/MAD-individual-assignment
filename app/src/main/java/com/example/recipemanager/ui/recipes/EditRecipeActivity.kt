@@ -1,14 +1,13 @@
-package com.example.recipemanager
+package com.example.recipemanager.ui.recipes
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import kotlinx.android.synthetic.main.activity_edit_recipe.*
 
@@ -56,7 +55,7 @@ class EditRecipeActivity : AppCompatActivity() {
                         etRecipeDescription.text.toString(),
                         etRecipeIngredients.text.toString(),
                         etRecipeInstructions.text.toString(),
-                        intent.getParcelableExtra<Recipe>(RECIPE_EXTRA).recipeId
+                        intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)?.recipeId
                     )
 
                     val resIntent = Intent()

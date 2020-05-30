@@ -14,10 +14,10 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
 import kotlinx.android.synthetic.main.item_collection.view.*
 
-class CollectionAdapter(private val collections: List<RecipeCollection>,
+class RecipeCollectionAdapter(private val collections: List<RecipeCollection>,
                     private val context: Context,
                     private val fragment: Fragment
-) : RecyclerView.Adapter<CollectionAdapter.ViewHolder>(){
+) : RecyclerView.Adapter<RecipeCollectionAdapter.ViewHolder>(){
 
     private val viewModel = ViewModelProvider(fragment).get(RecipeCollectionViewModel::class.java)
 
@@ -35,9 +35,6 @@ class CollectionAdapter(private val collections: List<RecipeCollection>,
                     when(it.itemId){
                         R.id.collection_item_rename -> {
                             //TODO
-                            val intent = Intent(context, EditRecipeActivity::class.java)
-                            intent.putExtra(EditRecipeActivity.RECIPE_EXTRA, recipe)
-                            fragment.startActivityForResult(intent, EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
                             true
                         }
                         R.id.collection_item_delete -> {
@@ -62,7 +59,7 @@ class CollectionAdapter(private val collections: List<RecipeCollection>,
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_recipe, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_collection, parent, false)
         )
     }
 

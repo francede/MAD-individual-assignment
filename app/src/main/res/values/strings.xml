@@ -7,4 +7,9 @@
     <string name="edit_recipe_description">Description</string>
     <string name="edit_recipe_ingredients">Ingredients</string>
     <string name="edit_recipe_instructions">Instructions</string>
+
+    <!-- Create collection activity -->
+    <string name="create_collection_activity_title">Create a new collection</string>
+    <string name="create_collection_give_name">Give your collection a name.</string>
+    <string name="create_collection_create">Create</string>
 </resources>

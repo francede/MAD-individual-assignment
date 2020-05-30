@@ -1,9 +1,7 @@
-package com.example.recipemanager
+package com.example.recipemanager.database
 
 import android.content.Context
-import android.util.Log
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
 
@@ -11,7 +9,8 @@ class RecipeRepository(context: Context) {
     private var recipesDAO: RecipesDAO
 
     init {
-        val reminderRoomDatabase = RecipeDatabase.getDatabase(context)
+        val reminderRoomDatabase =
+            RecipeDatabase.getDatabase(context)
         recipesDAO = reminderRoomDatabase!!.recipeDao()
     }
 

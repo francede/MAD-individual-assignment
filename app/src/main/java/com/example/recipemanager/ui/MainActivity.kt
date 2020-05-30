@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.recipemanager.EditRecipeActivity
+import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
+import com.example.recipemanager.ui.recipes.EditRecipeActivity
 import com.example.recipemanager.R
-import com.example.recipemanager.model.Recipe
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
@@ -40,7 +40,10 @@ class MainActivity : FragmentActivity() {
                     val intent = Intent(this, EditRecipeActivity::class.java)
                     startActivityForResult(intent, EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
                 }
-                1->null
+                1->{
+                    val intent = Intent(this, CreateCollectionActivity::class.java)
+                    startActivityForResult(intent, CreateCollectionActivity.CREATE_COLLECTION_REQUEST_CODE)
+                }
             }
         }
     }
@@ -53,5 +56,12 @@ class MainActivity : FragmentActivity() {
             // Otherwise, select first step
             viewPager.currentItem = 0
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        supportFragmentManager.fragments.forEach{
+            it.onActivityResult(requestCode, resultCode, data)
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

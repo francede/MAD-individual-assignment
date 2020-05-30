@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipemanager.EditRecipeActivity
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import kotlinx.android.synthetic.main.item_recipe.view.*

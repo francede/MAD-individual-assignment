@@ -4,26 +4,18 @@ package com.example.recipemanager.ui.recipes
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipemanager.EditRecipeActivity
 import com.example.recipemanager.R
-import com.example.recipemanager.RecipeRepository
 import com.example.recipemanager.model.Recipe
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 
 class RecipesFragment : Fragment() {
 
@@ -46,13 +38,13 @@ class RecipesFragment : Fragment() {
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
                 EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE -> {
-                    val recipe = data?.getParcelableExtra<Recipe>(EditRecipeActivity.RECIPE_EXTRA) ?: return
+                    val recipe = data?.getParcelableExtra<Recipe>(EditRecipeActivity.RECIPE_EXTRA)
+                        ?: return
                     if(recipe?.recipeId == null){
                         //insert
                         viewModel.insertRecipe(recipe)
                     }else{
                         //update
-                        Log.e("Update", recipe.toString())
                         viewModel.updateRecipe(recipe)
                     }
                     recipeAdapter.notifyDataSetChanged()
@@ -77,6 +69,4 @@ class RecipesFragment : Fragment() {
             recipeAdapter.notifyDataSetChanged()
         })
     }
-
-
 }

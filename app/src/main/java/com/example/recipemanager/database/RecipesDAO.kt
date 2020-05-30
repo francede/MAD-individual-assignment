@@ -1,4 +1,4 @@
-package com.example.recipemanager
+package com.example.recipemanager.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

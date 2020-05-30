@@ -20,12 +20,17 @@ data class Recipe(
 }
 
 @Entity
+@Parcelize
 data class RecipeCollection(
     val title: String,
 
     @PrimaryKey(autoGenerate = true)
     val collectionId: Long? = null
-)
+): Parcelable{
+    override fun toString(): String {
+        return "$collectionId: $title"
+    }
+}
 
 @Entity(primaryKeys = ["recipeId","collectionId"], foreignKeys = [
     ForeignKey(
