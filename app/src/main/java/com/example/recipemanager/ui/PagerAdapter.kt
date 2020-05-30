@@ -3,6 +3,8 @@ package com.example.recipemanager.ui
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.example.recipemanager.ui.recipecollection.CollectionFragment
+import com.example.recipemanager.ui.recipes.RecipesFragment
 
 class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 

@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/ivRecipeMenu"
+        android:id="@+id/ivCollectionMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:tint="@color/colorTextListItem"

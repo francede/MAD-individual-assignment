@@ -1,22 +1,30 @@
 package com.example.recipemanager.model
 
+import android.os.Parcelable
 import androidx.room.*
+import kotlinx.android.parcel.Parcelize
 
 @Entity
+@Parcelize
 data class Recipe(
-    @PrimaryKey(autoGenerate = true)
-    val recipeId: Long,
     val title: String,
     val description: String,
     val ingredients: String,
-    val instructions: String
-)
+    val instructions: String,
+    @PrimaryKey(autoGenerate = true)
+    val recipeId: Long? = null
+): Parcelable{
+    override fun toString(): String {
+        return "$recipeId: $title"
+    }
+}
 
 @Entity
 data class RecipeCollection(
+    val title: String,
+
     @PrimaryKey(autoGenerate = true)
-    val collectionId: Long,
-    val title: String
+    val collectionId: Long? = null
 )
 
 @Entity(primaryKeys = ["recipeId","collectionId"], foreignKeys = [

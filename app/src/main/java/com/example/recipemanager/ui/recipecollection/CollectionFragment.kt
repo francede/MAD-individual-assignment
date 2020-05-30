@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui
+package com.example.recipemanager.ui.recipecollection
 
 
 import android.os.Bundle
@@ -6,13 +6,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.customview.widget.FocusStrategy
 import com.example.recipemanager.R
+import com.example.recipemanager.RecipeDatabase
+import com.example.recipemanager.model.RecipeCollection
 import kotlinx.android.synthetic.main.fragment_collection.*
 
-/**
- * A simple [Fragment] subclass.
- */
 class CollectionFragment : Fragment() {
+
+    private lateinit var viewModel: RecipeCollectionViewModel
+    private val collections = arrayListOf<RecipeCollection>()
+    private lateinit var collectionAdapter: CollectionAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -20,7 +24,6 @@ class CollectionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tvCollection.text = "this is collection"
     }
 
 }

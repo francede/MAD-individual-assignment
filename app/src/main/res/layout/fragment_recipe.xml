@@ -5,10 +5,10 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.recipemanager.ui.RecipesFragment" >
+    tools:context="com.example.recipemanager.ui.recipes.RecipesFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvCollections"
+        android:id="@+id/rvRecipes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

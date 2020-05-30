@@ -1,11 +1,15 @@
 package com.example.recipemanager.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.recipemanager.EditRecipeActivity
 import com.example.recipemanager.R
+import com.example.recipemanager.model.Recipe
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : FragmentActivity() {
 
@@ -29,16 +33,25 @@ class MainActivity : FragmentActivity() {
                 1 -> tab.text = "Collections"
             }
         }.attach()
+
+        fab.setOnClickListener{
+            when(viewPager.currentItem){
+                0->{
+                    val intent = Intent(this, EditRecipeActivity::class.java)
+                    startActivityForResult(intent, EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
+                }
+                1->null
+            }
+        }
     }
 
     override fun onBackPressed() {
         if (viewPager.currentItem == 0) {
-            // If the user is currently looking at the first step, allow the system to handle the
-            // Back button. This calls finish() on this activity and pops the back stack.
+            // If the user is currently looking at the first step, allow the system to handle the back button.
             super.onBackPressed()
         } else {
-            // Otherwise, select the previous step.
-            viewPager.currentItem = viewPager.currentItem - 1
+            // Otherwise, select first step
+            viewPager.currentItem = 0
         }
     }
 }
