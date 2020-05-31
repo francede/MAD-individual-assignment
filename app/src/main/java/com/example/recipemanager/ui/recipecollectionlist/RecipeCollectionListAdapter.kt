@@ -1,8 +1,7 @@
-package com.example.recipemanager.ui.recipecollection
+package com.example.recipemanager.ui.recipecollectionlist
 
 import android.app.AlertDialog
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,12 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
 import kotlinx.android.synthetic.main.item_collection.view.*
 
-class RecipeCollectionAdapter(private val collections: List<RecipeCollection>,
-                    private val context: Context,
-                    private val fragment: Fragment
-) : RecyclerView.Adapter<RecipeCollectionAdapter.ViewHolder>(){
+class RecipeCollectionListAdapter(private val collections: List<RecipeCollection>,
+                                  private val context: Context,
+                                  fragment: Fragment
+) : RecyclerView.Adapter<RecipeCollectionListAdapter.ViewHolder>(){
 
-    private val viewModel = ViewModelProvider(fragment).get(RecipeCollectionViewModel::class.java)
+    private val viewModel = ViewModelProvider(fragment).get(RecipeCollectionListViewModel::class.java)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(collection: RecipeCollection) {

@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui.recipecollection
+package com.example.recipemanager.ui.recipecollectionlist
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeCollectionViewModel(application: Application) : AndroidViewModel(application) {
+class RecipeCollectionListViewModel(application: Application) : AndroidViewModel(application) {
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val recipeRepository =

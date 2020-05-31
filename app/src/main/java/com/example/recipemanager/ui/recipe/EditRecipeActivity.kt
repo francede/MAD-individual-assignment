@@ -1,27 +1,29 @@
-package com.example.recipemanager.ui.recipes
+package com.example.recipemanager.ui.recipe
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
+import com.example.recipemanager.ui.RECIPE_EXTRA
+import com.example.recipemanager.ui.recipecollectionlist.RecipeCollectionListViewModel
 import kotlinx.android.synthetic.main.activity_edit_recipe.*
 
 class EditRecipeActivity : AppCompatActivity() {
 
-    companion object{
-        const val RECIPE_EXTRA = "RECIPE_EXTRA"
-        const val EDIT_RECIPE_ACTIVITY_REQUEST_CODE = 100
-    }
+    private lateinit var viewModel: EditRecipeViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_recipe)
 
+        viewModel = ViewModelProvider(this).get(EditRecipeViewModel::class.java)
         initViews()
     }
 
@@ -36,6 +38,13 @@ class EditRecipeActivity : AppCompatActivity() {
             etRecipeIngredients.setText(recipe.instructions)
             etRecipeInstructions.setText(recipe.instructions)
         }
+    }
+
+    private fun startViewRecipeActivity(recipe: Recipe?){
+        val intent = Intent(this, ViewRecipeActivity::class.java)
+        intent.putExtra(RECIPE_EXTRA, recipe)
+
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -58,12 +67,17 @@ class EditRecipeActivity : AppCompatActivity() {
                         intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)?.recipeId
                     )
 
-                    val resIntent = Intent()
-                    resIntent.putExtra(RECIPE_EXTRA, recipe)
-                    setResult(Activity.RESULT_OK, resIntent)
-                    finish()
+                    if(recipe.recipeId == null) viewModel.insertRecipe(recipe)
+                    else viewModel.updateRecipe(recipe)
+
+                    startViewRecipeActivity(recipe)
+
                     true
                 }
+            }
+            android.R.id.home ->{
+                startViewRecipeActivity(intent.getParcelableExtra(RECIPE_EXTRA))
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }

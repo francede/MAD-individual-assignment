@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui.recipecollection
+package com.example.recipemanager.ui.recipecollectionlist
 
 import android.app.Activity
 import android.content.Intent
@@ -8,14 +8,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
+import com.example.recipemanager.ui.COLLECTION_EXTRA
 import kotlinx.android.synthetic.main.activity_create_collection.*
 
 class CreateCollectionActivity : AppCompatActivity() {
-
-    companion object{
-        const val CREATE_COLLECTION_REQUEST_CODE = 100
-        const val COLLECTION_EXTRA = "COLLECTION_EXTRA"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

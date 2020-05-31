@@ -3,8 +3,8 @@ package com.example.recipemanager.ui
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.recipemanager.ui.recipecollection.CollectionFragment
-import com.example.recipemanager.ui.recipes.RecipesFragment
+import com.example.recipemanager.ui.recipecollectionlist.RecipeCollectionListFragment
+import com.example.recipemanager.ui.recipelist.RecipeListFragment
 
 class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
 
@@ -13,9 +13,9 @@ class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fr
     override fun createFragment(position: Int): Fragment {
         // Return a NEW fragment instance in createFragment(int)
         return when(position) {
-            0 -> RecipesFragment()
-            1 -> CollectionFragment()
-            else -> RecipesFragment()
+            0 -> RecipeListFragment()
+            1 -> RecipeCollectionListFragment()
+            else -> RecipeListFragment()
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui.recipecollection
+package com.example.recipemanager.ui.recipecollectionlist
 
 
 import android.app.Activity
@@ -15,21 +15,23 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
+import com.example.recipemanager.ui.COLLECTION_EXTRA
+import com.example.recipemanager.ui.CREATE_COLLECTION_REQUEST_CODE
 import kotlinx.android.synthetic.main.fragment_collection.*
 
-class CollectionFragment : Fragment() {
+class RecipeCollectionListFragment : Fragment() {
 
-    private lateinit var viewModel: RecipeCollectionViewModel
+    private lateinit var viewModel: RecipeCollectionListViewModel
     private val collections = arrayListOf<RecipeCollection>()
-    private lateinit var collectionAdapter: RecipeCollectionAdapter
+    private lateinit var collectionAdapter: RecipeCollectionListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_collection, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        collectionAdapter = RecipeCollectionAdapter(collections, context!!, this)
-        viewModel = ViewModelProvider(this).get(RecipeCollectionViewModel::class.java)
+        collectionAdapter = RecipeCollectionListAdapter(collections, context!!, this)
+        viewModel = ViewModelProvider(this).get(RecipeCollectionListViewModel::class.java)
         initViews()
         observeViewModel()
     }
@@ -37,9 +39,9 @@ class CollectionFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(resultCode == Activity.RESULT_OK){
             when(requestCode){
-                CreateCollectionActivity.CREATE_COLLECTION_REQUEST_CODE -> {
+                CREATE_COLLECTION_REQUEST_CODE -> {
                     val collection = data?.getParcelableExtra<RecipeCollection>(
-                        CreateCollectionActivity.COLLECTION_EXTRA)
+                        COLLECTION_EXTRA)
                         ?: return
                     viewModel.insertCollection(collection)
                     collectionAdapter.notifyDataSetChanged()

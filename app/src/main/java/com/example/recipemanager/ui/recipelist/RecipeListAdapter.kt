@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui.recipes
+package com.example.recipemanager.ui.recipelist
 
 import android.app.AlertDialog
 import android.content.Context
@@ -13,18 +13,29 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
+import com.example.recipemanager.ui.EDIT_RECIPE_ACTIVITY_REQUEST_CODE
+import com.example.recipemanager.ui.RECIPE_EXTRA
+import com.example.recipemanager.ui.recipe.EditRecipeActivity
+import com.example.recipemanager.ui.recipe.ViewRecipeActivity
 import kotlinx.android.synthetic.main.item_recipe.view.*
 
-class RecipeAdapter(private val recipes: List<Recipe>,
-                    private val context: Context,
-                    private val fragment: Fragment
-) : RecyclerView.Adapter<RecipeAdapter.ViewHolder>(){
+class RecipeListAdapter(private val recipes: List<Recipe>,
+                        private val context: Context,
+                        private val fragment: Fragment
+) : RecyclerView.Adapter<RecipeListAdapter.ViewHolder>(){
 
-    private val viewModel = ViewModelProvider(fragment).get(RecipesViewModel::class.java)
+    private val viewModel = ViewModelProvider(fragment).get(RecipeListViewModel::class.java)
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(recipe: Recipe) {
             itemView.tvRecipeTitle.text = recipe.title
+
+            itemView.setOnClickListener{
+                val intent = Intent(context, ViewRecipeActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                intent.putExtra(RECIPE_EXTRA, recipe)
+                context.startActivity(intent)
+            }
 
             itemView.ivRecipeMenu.setImageResource(R.drawable.ic_more_vert_white_24dp)
 
@@ -40,9 +51,12 @@ class RecipeAdapter(private val recipes: List<Recipe>,
                             true
                         }
                         R.id.recipe_item_edit -> {
+
                             val intent = Intent(context, EditRecipeActivity::class.java)
-                            intent.putExtra(EditRecipeActivity.RECIPE_EXTRA, recipe)
-                            fragment.startActivityForResult(intent, EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
+                            intent.putExtra(RECIPE_EXTRA, recipe)
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                            fragment.startActivityForResult(intent, EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
+
                             true
                         }
                         R.id.recipe_item_delete -> {

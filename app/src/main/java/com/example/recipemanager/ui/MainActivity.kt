@@ -2,16 +2,23 @@ package com.example.recipemanager.ui
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
-import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
-import com.example.recipemanager.ui.recipes.EditRecipeActivity
+import com.example.recipemanager.ui.recipecollectionlist.CreateCollectionActivity
+import com.example.recipemanager.ui.recipe.EditRecipeActivity
 import com.example.recipemanager.R
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : FragmentActivity() {
+const val RECIPE_EXTRA = "RECIPE_EXTRA"
+const val COLLECTION_EXTRA = "COLLECTION_EXTRA"
+const val EDIT_RECIPE_ACTIVITY_REQUEST_CODE = 100
+const val CREATE_COLLECTION_REQUEST_CODE = 100
+
+
+class MainActivity : FragmentActivity(){
 
     private lateinit var viewPager: ViewPager2
 
@@ -38,11 +45,12 @@ class MainActivity : FragmentActivity() {
             when(viewPager.currentItem){
                 0->{
                     val intent = Intent(this, EditRecipeActivity::class.java)
-                    startActivityForResult(intent, EditRecipeActivity.EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                    startActivityForResult(intent, EDIT_RECIPE_ACTIVITY_REQUEST_CODE)
                 }
                 1->{
                     val intent = Intent(this, CreateCollectionActivity::class.java)
-                    startActivityForResult(intent, CreateCollectionActivity.CREATE_COLLECTION_REQUEST_CODE)
+                    startActivityForResult(intent, CREATE_COLLECTION_REQUEST_CODE)
                 }
             }
         }
