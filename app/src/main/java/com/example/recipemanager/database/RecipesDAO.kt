@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
+import com.example.recipemanager.model.RecipeInCollection
 
 @Dao
 interface RecipesDAO {
@@ -24,8 +25,11 @@ interface RecipesDAO {
     @Query("SELECT * FROM RecipeCollection")
     fun getAllCollections(): LiveData<List<RecipeCollection>>
 
+    @Query("SELECT * FROM recipecollection WHERE collectionId=:collectionId")
+    fun getCollection(collectionId: Long): LiveData<RecipeCollection>
+
     @Insert
-    suspend fun insertCollection(collection: RecipeCollection)
+    suspend fun insertCollection(collection: RecipeCollection): Long
 
     @Delete
     suspend fun deleteCollection(collection: RecipeCollection)
@@ -40,4 +44,13 @@ interface RecipesDAO {
         WHERE recipeincollection.collectionId = :collectionId
         """)
     fun getRecipesInCollection(collectionId: Long): LiveData<List<Recipe>>
+
+    @Query("SELECT * FROM recipeincollection WHERE recipeId=:recipeId AND collectionId=:collectionId")
+    suspend fun getRecipeInCollection(recipeId: Long, collectionId: Long): RecipeInCollection
+
+    @Insert
+    suspend fun insertRecipeInCollection(recipeInCollection: RecipeInCollection)
+
+    @Query("DELETE FROM recipeincollection WHERE recipeId=:recipeId AND collectionId=:collectionId")
+    suspend fun deleteRecipeInCollection(recipeId: Long, collectionId: Long)
 }

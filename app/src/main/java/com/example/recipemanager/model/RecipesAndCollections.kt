@@ -7,10 +7,10 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Recipe(
-    val title: String,
-    val description: String,
-    val ingredients: String,
-    val instructions: String,
+    var title: String,
+    var description: String,
+    var ingredients: String,
+    var instructions: String,
     @PrimaryKey(autoGenerate = true)
     val recipeId: Long? = null
 ): Parcelable{
@@ -22,7 +22,7 @@ data class Recipe(
 @Entity
 @Parcelize
 data class RecipeCollection(
-    val title: String,
+    var title: String,
 
     @PrimaryKey(autoGenerate = true)
     val collectionId: Long? = null
@@ -48,4 +48,8 @@ data class RecipeCollection(
 data class RecipeInCollection(
     val recipeId: Long,
     val collectionId: Long
-)
+){
+    override fun toString(): String {
+        return "$recipeId in $collectionId"
+    }
+}

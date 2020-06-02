@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
+import com.example.recipemanager.model.RecipeInCollection
 
 class RecipeRepository(context: Context) {
     private var recipesDAO: RecipesDAO
@@ -36,8 +37,12 @@ class RecipeRepository(context: Context) {
         return recipesDAO.getAllCollections()
     }
 
-    suspend fun insertCollection(collection: RecipeCollection){
-        recipesDAO.insertCollection(collection)
+    fun getCollection(collectionId: Long): LiveData<RecipeCollection>{
+        return recipesDAO.getCollection(collectionId)
+    }
+
+    suspend fun insertCollection(collection: RecipeCollection): Long{
+        return recipesDAO.insertCollection(collection)
     }
 
 
@@ -50,9 +55,19 @@ class RecipeRepository(context: Context) {
         recipesDAO.updateCollection(collection)
     }
 
-
-    fun getRecipesInCollection(id: Long): LiveData<List<Recipe>>{
-        return recipesDAO.getRecipesInCollection(id)
+    suspend fun getRecipeInCollection(recipeId: Long, collectionId: Long): RecipeInCollection{
+        return recipesDAO.getRecipeInCollection(recipeId, collectionId)
     }
 
+    fun getRecipesInCollection(collectionId: Long): LiveData<List<Recipe>>{
+        return recipesDAO.getRecipesInCollection(collectionId)
+    }
+
+    suspend fun insertRecipeInCollection(recipeInCollection: RecipeInCollection){
+        recipesDAO.insertRecipeInCollection(recipeInCollection)
+    }
+
+    suspend fun deleteRecipeInCollection(recipeId: Long, collectionId: Long){
+        recipesDAO.deleteRecipeInCollection(recipeId, collectionId)
+    }
 }

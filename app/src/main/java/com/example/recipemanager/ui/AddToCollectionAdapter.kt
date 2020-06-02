@@ -9,14 +9,20 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
 import kotlinx.android.synthetic.main.item_collection_select.view.*
 
-//TODO
-class SelectCollectionAdapter(private val collections: List<RecipeCollection>,
-                              private val context: Context
-) : RecyclerView.Adapter<SelectCollectionAdapter.ViewHolder>() {
+class AddToCollectionAdapter(
+    private val collections: List<RecipeCollection>,
+    private val context: Context
+) : RecyclerView.Adapter<AddToCollectionAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(collection: RecipeCollection) {
             itemView.tvCollectionTitle.text = collection.title
+            itemView.setOnClickListener{
+                if(context is AddToCollectionActivity){
+                    context.addToCollection(collection)
+                    context.finish()
+                }
+            }
         }
     }
 

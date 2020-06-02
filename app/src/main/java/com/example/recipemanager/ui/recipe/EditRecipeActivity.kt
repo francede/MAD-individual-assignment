@@ -35,7 +35,7 @@ class EditRecipeActivity : AppCompatActivity() {
         if(recipe != null){
             etRecipeTitle.setText(recipe.title)
             etRecipeDescription.setText(recipe.description)
-            etRecipeIngredients.setText(recipe.instructions)
+            etRecipeIngredients.setText(recipe.ingredients)
             etRecipeInstructions.setText(recipe.instructions)
         }
     }

@@ -1,24 +1,24 @@
-package com.example.recipemanager.ui.recipelist
+package com.example.recipemanager.ui.recipecollection
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.example.recipemanager.database.RecipeRepository
 import com.example.recipemanager.model.Recipe
+import com.example.recipemanager.model.RecipeCollection
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class RecipeListViewModel(application: Application) : AndroidViewModel(application) {
+class ViewCollectionViewModel(application: Application, collectionId: Long) : AndroidViewModel(application) {
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val recipeRepository = RecipeRepository(application.applicationContext)
-    val recipes: LiveData<List<Recipe>> = recipeRepository.getAllRecipes()
+    val recipes: LiveData<List<Recipe>> = recipeRepository.getRecipesInCollection(collectionId)
 
-    fun deleteRecipe(recipe: Recipe){
+    fun deleteRecipeInCollection(recipeId: Long, collectionId: Long){
         ioScope.launch {
-            recipeRepository.deleteRecipe(recipe)
+            recipeRepository.deleteRecipeInCollection(recipeId, collectionId)
         }
     }
-
 }
