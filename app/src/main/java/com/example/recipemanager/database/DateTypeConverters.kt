@@ -3,7 +3,7 @@ package com.example.recipemanager.database
 import androidx.room.TypeConverter
 import java.util.*
 
-class TypeConverters {
+class DateTypeConverters {
 
     @TypeConverter
     fun epochToDate(value: Long?): Date? {

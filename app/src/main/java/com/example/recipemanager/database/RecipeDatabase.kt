@@ -4,11 +4,13 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.model.RecipeInCollection
 
 @Database(entities = [Recipe::class, RecipeCollection::class, RecipeInCollection::class], version = 1, exportSchema = false)
+@TypeConverters(DateTypeConverters::class)
 abstract class RecipeDatabase : RoomDatabase() {
 
     abstract fun recipeDao(): RecipesDAO

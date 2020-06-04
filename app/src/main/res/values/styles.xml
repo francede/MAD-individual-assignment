@@ -2,5 +2,16 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimaryBeige</item>
         <item name="colorAccent">@color/colorPrimaryRed</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="actionBarStyle">@style/AppTheme.actionBarStyle</item>
+    </style>
+
+    <style name="AppTheme.actionBarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid">
+        <item name="elevation">0dp</item>
+        <item name="titleTextStyle">@style/AppTheme.actionBarStyle.TitleTextStyle</item>
+    </style>
+
+    <style name="AppTheme.actionBarStyle.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/colorPrimaryRed</item>
     </style>
 </resources>

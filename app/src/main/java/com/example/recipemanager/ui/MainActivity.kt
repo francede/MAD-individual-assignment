@@ -2,6 +2,10 @@ package com.example.recipemanager.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -19,7 +23,7 @@ const val EDIT_RECIPE_ACTIVITY_REQUEST_CODE = 100
 const val CREATE_COLLECTION_REQUEST_CODE = 100
 
 
-class MainActivity : FragmentActivity(){
+class MainActivity : AppCompatActivity(){
 
     private lateinit var viewPager: ViewPager2
     private lateinit var fabVisibilityListener: FloatingActionButton.OnVisibilityChangedListener
@@ -115,5 +119,21 @@ class MainActivity : FragmentActivity(){
             it.onActivityResult(requestCode, resultCode, data)
         }
         super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.simple_sort_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.action_sort ->{
+                val sortFragment = SortFragment()
+                sortFragment.show(supportFragmentManager, "sort")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

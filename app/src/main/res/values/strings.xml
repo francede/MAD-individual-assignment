@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Recipemanager</string>
+    <string name="app_name">Recipe Manager</string>
 
     <!-- Multiple words -->
     <string name="edit_recipe">Edit recipe</string>
@@ -13,6 +13,9 @@
     <string name="confirm_delete">Confirm delete</string>
     <string name="sure_to_delete">Are you sure you want to delete %s?</string>
 
+    <string name="created">Created: %s</string>
+    <string name="last_updated">Created: %s</string>
+
 
     <!-- Single words -->
     <string name="title">Title</string>
@@ -25,6 +28,7 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="sort">Sort</string>
 
     <string name="recipes">Recipes</string>
     <string name="collections">Collections</string>
