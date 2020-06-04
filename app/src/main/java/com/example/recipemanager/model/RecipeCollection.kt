@@ -10,8 +10,8 @@ import java.util.*
 @Parcelize
 data class RecipeCollection(
     var title: String,
-    var created: Date = Date(),
-    var lastUpdated: Date = Date(),
+    //var created: Date = Date(),
+    //var lastUpdated: Date = Date(),
     @PrimaryKey(autoGenerate = true)
     val collectionId: Long? = null
 ): Parcelable {

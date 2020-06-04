@@ -13,7 +13,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:paddingBottom="12dp">
 
             <TextView
                 android:id="@+id/tvRecipeTitle"
@@ -52,6 +53,7 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
+                android:background="#EEE"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,8 +77,8 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
+                android:background="#EEE"
                 android:ems="10"
-                android:gravity="start|top"
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +91,8 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
+                android:background="#EEE"
                 android:ems="10"
-                android:gravity="start|top"
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -103,8 +105,8 @@
                 android:layout_marginLeft="12dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="12dp"
+                android:background="#EEE"
                 android:ems="10"
-                android:gravity="start|top"
                 android:inputType="textMultiLine"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -23,6 +23,8 @@
     <string name="rename">Rename</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
+    <string name="edit">Edit</string>
+    <string name="save">Save</string>
 
     <string name="recipes">Recipes</string>
     <string name="collections">Collections</string>

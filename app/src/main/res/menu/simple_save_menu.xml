@@ -4,6 +4,6 @@
     <item
         android:id="@+id/action_save"
         android:icon="@drawable/ic_save_white_24dp"
-        android:title="Sort"
+        android:title="@string/save"
         app:showAsAction="ifRoom"/>
 </menu>
