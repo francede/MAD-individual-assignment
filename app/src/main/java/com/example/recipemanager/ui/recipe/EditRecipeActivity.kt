@@ -11,6 +11,7 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.ui.RECIPE_EXTRA
 import kotlinx.android.synthetic.main.activity_edit_recipe.*
+import java.util.*
 
 class EditRecipeActivity : AppCompatActivity() {
 
@@ -56,12 +57,14 @@ class EditRecipeActivity : AppCompatActivity() {
                     Toast.makeText(this,R.string.recipe_must_have_title,Toast.LENGTH_SHORT).show()
                     true
                 }else{
+                    val oldRecipe = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)
                     val recipe = Recipe(
                         etRecipeTitle.text.toString(),
                         etRecipeDescription.text.toString(),
                         etRecipeIngredients.text.toString(),
                         etRecipeInstructions.text.toString(),
-                        recipeId = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)?.recipeId
+                        created = oldRecipe?.created!!,
+                        recipeId = oldRecipe.recipeId
                     )
 
                     if(recipe.recipeId == null) viewModel.insertRecipe(recipe)

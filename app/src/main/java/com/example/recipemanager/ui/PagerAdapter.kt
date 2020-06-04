@@ -7,15 +7,30 @@ import com.example.recipemanager.ui.recipecollectionlist.RecipeCollectionListFra
 import com.example.recipemanager.ui.recipelist.RecipeListFragment
 
 class PagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
+    lateinit var recipeListFragment: RecipeListFragment
+    lateinit var collectionListFragment: RecipeCollectionListFragment
 
     override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         // Return a NEW fragment instance in createFragment(int)
+        var f: Fragment
         return when(position) {
-            0 -> RecipeListFragment()
-            1 -> RecipeCollectionListFragment()
-            else -> RecipeListFragment()
+            0 -> {
+                f = RecipeListFragment()
+                recipeListFragment = f
+                f
+            }
+            1 -> {
+                f = RecipeCollectionListFragment()
+                collectionListFragment = f
+                f
+            }
+            else -> {
+                f = RecipeListFragment()
+                recipeListFragment = f
+                f
+            }
         }
     }
 }

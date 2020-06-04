@@ -17,6 +17,7 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.ui.EDIT_RECIPE_ACTIVITY_REQUEST_CODE
 import com.example.recipemanager.ui.MainActivity
+import com.example.recipemanager.ui.SortFragment
 import kotlinx.android.synthetic.main.fragment_recipe.*
 
 class RecipeListFragment : Fragment() {
@@ -55,8 +56,12 @@ class RecipeListFragment : Fragment() {
         rvRecipes.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         var scrollListener: RecyclerView.OnScrollListener? = null
+        var sortFragmentCallback: SortFragment.OnClickCallback? = null
         activity?.let{
-            if(it is MainActivity) scrollListener = it.scrollListener
+            if(it is MainActivity){
+                scrollListener = it.scrollListener
+                sortFragmentCallback = it.sortFragmentCallback
+            }
         }
 
         rvRecipes.addOnScrollListener(scrollListener!!)
@@ -69,5 +74,20 @@ class RecipeListFragment : Fragment() {
             this.recipes.addAll(recipes)
             recipeAdapter.notifyDataSetChanged()
         })
+    }
+
+    fun sort(sortOption: SortFragment.SortOption){
+        when(sortOption){
+            SortFragment.SortOption.TITLE -> recipes.sortBy { it.title }
+            SortFragment.SortOption.CREATED -> {
+                recipes.sortBy { it.created }
+                recipes.reverse()
+            }
+            SortFragment.SortOption.LAST_UPDATED -> {
+                recipes.sortBy { it.lastUpdated }
+                recipes.reverse()
+            }
+        }
+        recipeAdapter.notifyDataSetChanged()
     }
 }

@@ -12,6 +12,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
 import com.example.recipemanager.ui.recipe.EditRecipeActivity
 import com.example.recipemanager.R
+import com.example.recipemanager.ui.recipelist.RecipeListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -26,6 +27,8 @@ const val CREATE_COLLECTION_REQUEST_CODE = 100
 class MainActivity : AppCompatActivity(){
 
     private lateinit var viewPager: ViewPager2
+    private lateinit var pagerAdapter: PagerAdapter
+    private lateinit var sortFragment: SortFragment
     private lateinit var fabVisibilityListener: FloatingActionButton.OnVisibilityChangedListener
     private var fabShouldBeShown = true
 
@@ -42,6 +45,17 @@ class MainActivity : AppCompatActivity(){
         }
     }
 
+    //Callback for sort fragment
+    val sortFragmentCallback = object : SortFragment.OnClickCallback{
+        override fun callback(option: SortFragment.SortOption) {
+            when(viewPager.currentItem){
+                0 -> pagerAdapter.recipeListFragment.sort(option)
+                1 -> pagerAdapter.collectionListFragment.sort(option)
+            }
+            sortFragment.dismiss()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -51,7 +65,8 @@ class MainActivity : AppCompatActivity(){
 
     private fun initViews(){
         viewPager = findViewById(R.id.viewPager)
-        viewPager.adapter = PagerAdapter(this)
+        pagerAdapter = PagerAdapter(this)
+        viewPager.adapter = pagerAdapter
 
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
         TabLayoutMediator(tabLayout, viewPager){ tab,position ->
@@ -129,7 +144,7 @@ class MainActivity : AppCompatActivity(){
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.action_sort ->{
-                val sortFragment = SortFragment()
+                sortFragment = SortFragment(sortFragmentCallback)
                 sortFragment.show(supportFragmentManager, "sort")
                 true
             }

@@ -33,6 +33,9 @@ class ViewRecipeActivity : AppCompatActivity() {
         tvRecipeDescription.text = recipe.description
         tvRecipeIngredients.text = recipe.ingredients
         tvRecipeInstructions.text = recipe.instructions
+
+        tvCreated.text = getString(R.string.created, recipe.created.toString())
+        tvLastUpdated.text = getString(R.string.last_updated, recipe.lastUpdated.toString())
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.simple_edit_menu, menu)

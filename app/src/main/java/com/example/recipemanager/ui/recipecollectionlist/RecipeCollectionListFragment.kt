@@ -18,6 +18,7 @@ import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.ui.COLLECTION_EXTRA
 import com.example.recipemanager.ui.CREATE_COLLECTION_REQUEST_CODE
 import com.example.recipemanager.ui.MainActivity
+import com.example.recipemanager.ui.SortFragment
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class RecipeCollectionListFragment : Fragment() {
@@ -73,5 +74,14 @@ class RecipeCollectionListFragment : Fragment() {
             this.collections.addAll(collections)
             collectionAdapter.notifyDataSetChanged()
         })
+    }
+
+    fun sort(sortOption: SortFragment.SortOption){
+        when(sortOption){
+            SortFragment.SortOption.TITLE -> collections.sortBy { it.title }
+            SortFragment.SortOption.CREATED -> collections.sortBy { it.created }
+            SortFragment.SortOption.LAST_UPDATED -> collections.sortBy { it.lastUpdated }
+        }
+        collectionAdapter.notifyDataSetChanged()
     }
 }

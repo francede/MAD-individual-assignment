@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.model.RecipeInCollection
+import java.util.*
 
 class RecipeRepository(context: Context) {
     private var recipesDAO: RecipesDAO
@@ -29,16 +30,13 @@ class RecipeRepository(context: Context) {
 
 
     suspend fun updateRecipe(recipe: Recipe){
+        recipe.lastUpdated = Date()
         recipesDAO.updateRecipe(recipe)
     }
 
 
     fun getAllCollections(): LiveData<List<RecipeCollection>>{
         return recipesDAO.getAllCollections()
-    }
-
-    fun getCollection(collectionId: Long): LiveData<RecipeCollection>{
-        return recipesDAO.getCollection(collectionId)
     }
 
     suspend fun insertCollection(collection: RecipeCollection): Long{
@@ -52,6 +50,7 @@ class RecipeRepository(context: Context) {
 
 
     suspend fun updateCollection(collection: RecipeCollection){
+        collection.lastUpdated = Date()
         recipesDAO.updateCollection(collection)
     }
 

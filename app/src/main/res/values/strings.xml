@@ -14,7 +14,7 @@
     <string name="sure_to_delete">Are you sure you want to delete %s?</string>
 
     <string name="created">Created: %s</string>
-    <string name="last_updated">Created: %s</string>
+    <string name="last_updated">Last updated: %s</string>
 
 
     <!-- Single words -->

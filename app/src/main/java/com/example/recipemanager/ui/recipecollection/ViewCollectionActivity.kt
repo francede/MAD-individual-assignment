@@ -15,7 +15,9 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.ui.COLLECTION_EXTRA
+import kotlinx.android.synthetic.main.activity_view_collection.*
 import kotlinx.android.synthetic.main.fragment_recipe.*
+import kotlinx.android.synthetic.main.fragment_recipe.rvRecipes
 import kotlinx.android.synthetic.main.popup_rename_collection.view.*
 
 class ViewCollectionActivity : AppCompatActivity() {
@@ -44,6 +46,9 @@ class ViewCollectionActivity : AppCompatActivity() {
         rvRecipes.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvRecipes.adapter = recipeAdapter
         rvRecipes.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        tvCreated.text = getString(R.string.created, collection.created.toString())
+        tvLastUpdated.text = getString(R.string.last_updated, collection.lastUpdated.toString())
     }
 
     private fun observeViewModel(){

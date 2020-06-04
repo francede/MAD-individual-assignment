@@ -16,6 +16,7 @@ import com.example.recipemanager.ui.COLLECTION_EXTRA
 import com.example.recipemanager.ui.recipecollection.ViewCollectionActivity
 import kotlinx.android.synthetic.main.item_collection.view.*
 import kotlinx.android.synthetic.main.popup_rename_collection.view.*
+import java.util.*
 
 class RecipeCollectionListAdapter(private val collections: List<RecipeCollection>,
                                   private val context: Context,
