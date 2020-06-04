@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.recipecollectionlist.CreateCollectionActivity">
+    tools:context=".ui.recipecollection.CreateCollectionActivity">
 
     <Button
         android:id="@+id/btnCreateCollection"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/create_collection_create"
+        android:text="@string/create"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etCollectionTitle" />
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="@string/create_collection_give_name"
+        android:text="@string/give_collection_name"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/etCollectionTitle"
         app:layout_constraintEnd_toEndOf="parent"

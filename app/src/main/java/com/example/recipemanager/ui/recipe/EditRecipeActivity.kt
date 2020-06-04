@@ -1,10 +1,8 @@
 package com.example.recipemanager.ui.recipe
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -12,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.ui.RECIPE_EXTRA
-import com.example.recipemanager.ui.recipecollectionlist.RecipeCollectionListViewModel
 import kotlinx.android.synthetic.main.activity_edit_recipe.*
 
 class EditRecipeActivity : AppCompatActivity() {
@@ -29,7 +26,7 @@ class EditRecipeActivity : AppCompatActivity() {
 
     private fun initViews(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setTitle(R.string.edit_recipe_activity_title)
+        supportActionBar?.setTitle(R.string.edit_recipe)
 
         val recipe = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)
         if(recipe != null){
@@ -48,7 +45,7 @@ class EditRecipeActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.edit_recipe_menu, menu)
+        menuInflater.inflate(R.menu.simple_save_menu, menu)
         return true
     }
 
@@ -56,7 +53,7 @@ class EditRecipeActivity : AppCompatActivity() {
         return when(item.itemId){
             R.id.action_save ->{
                 if(etRecipeTitle.text.toString().isBlank()){
-                    Toast.makeText(this,"Recipe must have a title",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,R.string.recipe_must_have_title,Toast.LENGTH_SHORT).show()
                     true
                 }else{
                     val recipe = Recipe(
@@ -64,7 +61,7 @@ class EditRecipeActivity : AppCompatActivity() {
                         etRecipeDescription.text.toString(),
                         etRecipeIngredients.text.toString(),
                         etRecipeInstructions.text.toString(),
-                        intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)?.recipeId
+                        recipeId = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)?.recipeId
                     )
 
                     if(recipe.recipeId == null) viewModel.insertRecipe(recipe)
@@ -76,7 +73,9 @@ class EditRecipeActivity : AppCompatActivity() {
                 }
             }
             android.R.id.home ->{
-                startViewRecipeActivity(intent.getParcelableExtra(RECIPE_EXTRA))
+                val recipe = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)
+                if(recipe?.recipeId != null)startViewRecipeActivity(recipe)
+                else finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)

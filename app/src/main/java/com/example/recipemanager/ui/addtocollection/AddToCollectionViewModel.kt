@@ -1,9 +1,7 @@
-package com.example.recipemanager.ui
+package com.example.recipemanager.ui.addtocollection
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import com.example.recipemanager.database.RecipeRepository
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
@@ -38,9 +36,5 @@ class AddToCollectionViewModel(application: Application) : AndroidViewModel(appl
             id = recipeRepository.insertCollection(collection)
         }
         return id
-    }
-
-    fun getCollection(collectionId: Long): LiveData<RecipeCollection>{
-        return recipeRepository.getCollection(collectionId)
     }
 }

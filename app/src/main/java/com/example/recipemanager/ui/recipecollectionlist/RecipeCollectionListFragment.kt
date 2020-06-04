@@ -17,6 +17,7 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.ui.COLLECTION_EXTRA
 import com.example.recipemanager.ui.CREATE_COLLECTION_REQUEST_CODE
+import com.example.recipemanager.ui.MainActivity
 import kotlinx.android.synthetic.main.fragment_collection.*
 
 class RecipeCollectionListFragment : Fragment() {
@@ -57,6 +58,13 @@ class RecipeCollectionListFragment : Fragment() {
         rvCollections.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rvCollections.adapter = collectionAdapter
         rvCollections.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        var scrollListener: RecyclerView.OnScrollListener? = null
+        activity?.let{
+            if(it is MainActivity) scrollListener = it.scrollListener
+        }
+
+        rvCollections.addOnScrollListener(scrollListener!!)
     }
 
     private fun observeViewModel(){

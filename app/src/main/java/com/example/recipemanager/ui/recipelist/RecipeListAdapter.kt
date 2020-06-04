@@ -14,7 +14,7 @@ import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.ui.EDIT_RECIPE_ACTIVITY_REQUEST_CODE
 import com.example.recipemanager.ui.RECIPE_EXTRA
-import com.example.recipemanager.ui.AddToCollectionActivity
+import com.example.recipemanager.ui.addtocollection.AddToCollectionActivity
 import com.example.recipemanager.ui.recipe.EditRecipeActivity
 import com.example.recipemanager.ui.recipe.ViewRecipeActivity
 import kotlinx.android.synthetic.main.item_recipe.view.*
@@ -63,12 +63,12 @@ class RecipeListAdapter(private val recipes: List<Recipe>,
                         }
                         R.id.recipe_item_delete -> {
                             val builder = AlertDialog.Builder(context)
-                            builder.setTitle("Confirm delete")
-                            builder.setMessage("Are you sure you want to delete " + recipe.title + "?")
-                            builder.setPositiveButton("Delete"){ _, _ ->
+                            builder.setTitle(context.getString(R.string.confirm_delete))
+                            builder.setMessage(context.getString(R.string.sure_to_delete, recipe.title))
+                            builder.setPositiveButton(context.getString(R.string.delete)){ _, _ ->
                                 viewModel.deleteRecipe(recipe)
                             }
-                            builder.setNegativeButton("Cancel"){ dialog, _ ->
+                            builder.setNegativeButton(context.getString(R.string.cancel)){ dialog, _ ->
                                 dialog.dismiss()
                             }
                             builder.show()

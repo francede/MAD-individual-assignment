@@ -1,10 +1,9 @@
-package com.example.recipemanager.ui
+package com.example.recipemanager.ui.addtocollection
 
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,9 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
-import com.example.recipemanager.ui.recipecollectionlist.CreateCollectionActivity
+import com.example.recipemanager.ui.COLLECTION_EXTRA
+import com.example.recipemanager.ui.CREATE_COLLECTION_REQUEST_CODE
+import com.example.recipemanager.ui.RECIPE_EXTRA
+import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
 import kotlinx.android.synthetic.main.activity_select_collection.*
-import kotlinx.android.synthetic.main.fragment_recipe.*
 
 class AddToCollectionActivity : AppCompatActivity() {
 
@@ -30,7 +31,8 @@ class AddToCollectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_select_collection)
 
         recipe = intent.getParcelableExtra(RECIPE_EXTRA)!!
-        addToCollectionAdapter = AddToCollectionAdapter(collections, this)
+        addToCollectionAdapter =
+            AddToCollectionAdapter(collections, this)
         viewModel = ViewModelProvider(this).get(AddToCollectionViewModel::class.java)
 
         initViews()
@@ -39,7 +41,7 @@ class AddToCollectionActivity : AppCompatActivity() {
 
     private fun initViews(){
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Add ${recipe.title} to collection"
+        supportActionBar?.title = getString(R.string.add_to_collection, recipe.title)
 
         rvCollections.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         rvCollections.adapter = addToCollectionAdapter
@@ -47,6 +49,7 @@ class AddToCollectionActivity : AppCompatActivity() {
 
         btnAddCollection.setOnClickListener{
             val intent = Intent(this, CreateCollectionActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
             startActivityForResult(intent, CREATE_COLLECTION_REQUEST_CODE)
         }
     }
@@ -69,7 +72,6 @@ class AddToCollectionActivity : AppCompatActivity() {
                 CREATE_COLLECTION_REQUEST_CODE ->{
                     val collection = data?.getParcelableExtra<RecipeCollection>(COLLECTION_EXTRA)
                     if(collection != null){
-                        Log.e("coll", collection.toString())
                         viewModel.insertCollection(collection)
                     }
                 }

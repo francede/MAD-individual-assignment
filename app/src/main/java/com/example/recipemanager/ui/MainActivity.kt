@@ -2,12 +2,13 @@ package com.example.recipemanager.ui
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
-import com.example.recipemanager.ui.recipecollectionlist.CreateCollectionActivity
+import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
 import com.example.recipemanager.ui.recipe.EditRecipeActivity
 import com.example.recipemanager.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +22,21 @@ const val CREATE_COLLECTION_REQUEST_CODE = 100
 class MainActivity : FragmentActivity(){
 
     private lateinit var viewPager: ViewPager2
+    private lateinit var fabVisibilityListener: FloatingActionButton.OnVisibilityChangedListener
+    private var fabShouldBeShown = true
+
+    //Scroll listener to pass to fragments
+    val scrollListener: RecyclerView.OnScrollListener = object : RecyclerView.OnScrollListener(){
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+
+            if(!recyclerView.canScrollVertically(1) && recyclerView.canScrollVertically(-1)){
+                setFabVisibility(false)
+            }else{
+                setFabVisibility(true)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,8 +52,8 @@ class MainActivity : FragmentActivity(){
         val tabLayout: TabLayout = findViewById(R.id.tabLayout)
         TabLayoutMediator(tabLayout, viewPager){ tab,position ->
             when(position){
-                0 -> tab.text = "Recipes"
-                1 -> tab.text = "Collections"
+                0 -> tab.text = getString(R.string.recipes)
+                1 -> tab.text = getString(R.string.collections)
             }
         }.attach()
 
@@ -50,10 +66,38 @@ class MainActivity : FragmentActivity(){
                 }
                 1->{
                     val intent = Intent(this, CreateCollectionActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                     startActivityForResult(intent, CREATE_COLLECTION_REQUEST_CODE)
                 }
             }
         }
+
+        fabVisibilityListener = object : FloatingActionButton.OnVisibilityChangedListener(){
+            override fun onShown(fab: FloatingActionButton?) {
+                super.onShown(fab)
+                if(fabShouldBeShown) fab?.show()
+            }
+
+            override fun onHidden(fab: FloatingActionButton?) {
+                super.onHidden(fab)
+                if(!fabShouldBeShown) fab?.hide()
+            }
+        }
+
+        viewPager.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    setFabVisibility(true)
+                }
+            }
+        )
+    }
+
+    fun setFabVisibility(isShown: Boolean){
+        fabShouldBeShown = isShown
+        if(isShown) fab.show(fabVisibilityListener)
+        else fab.hide(fabVisibilityListener)
     }
 
     override fun onBackPressed() {

@@ -35,7 +35,7 @@ class ViewRecipeActivity : AppCompatActivity() {
         tvRecipeInstructions.text = recipe.instructions
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.view_recipe_menu, menu)
+        menuInflater.inflate(R.menu.simple_edit_menu, menu)
         return true
     }
 

@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui
+package com.example.recipemanager.ui.addtocollection
 
 import android.content.Context
 import android.view.LayoutInflater

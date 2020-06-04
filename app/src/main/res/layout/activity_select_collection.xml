@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.AddToCollectionActivity">
+    tools:context=".ui.addtocollection.AddToCollectionActivity">
 
     <Button
         android:id="@+id/btnAddCollection"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/choose_collection_creeate_new"
+        android:text="@string/new_collection"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

@@ -1,6 +1,5 @@
 package com.example.recipemanager.ui.recipecollection
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.model.RecipeCollection
-import com.example.recipemanager.model.RecipeInCollection
 import com.example.recipemanager.ui.EDIT_RECIPE_ACTIVITY_REQUEST_CODE
 import com.example.recipemanager.ui.RECIPE_EXTRA
 import com.example.recipemanager.ui.recipe.EditRecipeActivity

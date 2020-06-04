@@ -1,19 +1,30 @@
 <resources>
     <string name="app_name">Recipemanager</string>
 
-    <!-- Edit recipe activity -->
-    <string name="edit_recipe_activity_title">Edit recipe</string>
-    <string name="edit_recipe_title">Title</string>
-    <string name="edit_recipe_description">Description</string>
-    <string name="edit_recipe_ingredients">Ingredients</string>
-    <string name="edit_recipe_instructions">Instructions</string>
+    <!-- Multiple words -->
+    <string name="edit_recipe">Edit recipe</string>
+    <string name="create_collection">Create collection</string>
+    <string name="select_collection">Choose collection</string>
+    <string name="recipe_must_have_title">Recipe must have a title</string>
+    <string name="give_collection_name">Give your collection a name.</string>
+    <string name="new_collection">New collection +</string>
+    <string name="add_to_collection">Add %s to collection</string>
+    <string name="rename_collection">Rename collection</string>
+    <string name="confirm_delete">Confirm delete</string>
+    <string name="sure_to_delete">Are you sure you want to delete %s?</string>
 
-    <!-- Create collection activity -->
-    <string name="create_collection_activity_title">Create a new collection</string>
-    <string name="create_collection_give_name">Give your collection a name.</string>
-    <string name="create_collection_create">Create</string>
 
-    <!-- Choose collection activity -->
-    <string name="choose_collection_activity_title">Choose collection</string>
-    <string name="choose_collection_creeate_new">New collection +</string>
+    <!-- Single words -->
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
+    <string name="create">Create</string>
+    <string name="rename">Rename</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <string name="recipes">Recipes</string>
+    <string name="collections">Collections</string>
+
 </resources>

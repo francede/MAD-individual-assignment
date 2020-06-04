@@ -21,4 +21,10 @@ class ViewCollectionViewModel(application: Application, collectionId: Long) : An
             recipeRepository.deleteRecipeInCollection(recipeId, collectionId)
         }
     }
+
+    fun updateCollection(collection: RecipeCollection){
+        ioScope.launch {
+            recipeRepository.updateCollection(collection)
+        }
+    }
 }

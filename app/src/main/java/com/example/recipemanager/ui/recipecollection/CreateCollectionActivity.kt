@@ -1,4 +1,4 @@
-package com.example.recipemanager.ui.recipecollectionlist
+package com.example.recipemanager.ui.recipecollection
 
 import android.app.Activity
 import android.content.Intent
@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.MenuItem
 import com.example.recipemanager.R
 import com.example.recipemanager.model.RecipeCollection
 import com.example.recipemanager.ui.COLLECTION_EXTRA
@@ -21,6 +22,9 @@ class CreateCollectionActivity : AppCompatActivity() {
     }
 
     private fun initViews(){
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = getString(R.string.create_collection)
+
         //Set watcher that listens when text changes (button should be disabled if edittext is empty)
         btnCreateCollection.isClickable = false
         etCollectionTitle.addTextChangedListener(object: TextWatcher{
@@ -29,7 +33,6 @@ class CreateCollectionActivity : AppCompatActivity() {
             }
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {} //Ignore
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}//Ignore
-
         })
 
         btnCreateCollection.setOnClickListener{
@@ -38,6 +41,16 @@ class CreateCollectionActivity : AppCompatActivity() {
             resIntent.putExtra(COLLECTION_EXTRA, collection)
             setResult(Activity.RESULT_OK, resIntent)
             finish()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home ->{
+                finish()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
