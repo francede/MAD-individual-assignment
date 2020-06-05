@@ -1,18 +1,22 @@
 package com.example.recipemanager.ui
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuItemCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.example.recipemanager.ui.recipecollection.CreateCollectionActivity
 import com.example.recipemanager.ui.recipe.EditRecipeActivity
 import com.example.recipemanager.R
-import com.example.recipemanager.ui.recipelist.RecipeListFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -46,7 +50,7 @@ class MainActivity : AppCompatActivity(){
     }
 
     //Callback for sort fragment
-    val sortFragmentCallback = object : SortFragment.OnClickCallback{
+    private val sortFragmentCallback = object : SortFragment.OnClickCallback{
         override fun callback(option: SortFragment.SortOption) {
             when(viewPager.currentItem){
                 0 -> pagerAdapter.recipeListFragment.sort(option)
@@ -138,6 +142,27 @@ class MainActivity : AppCompatActivity(){
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.simple_sort_menu, menu)
+
+        val searchItem = menu?.findItem(R.id.search)
+        val searchView = MenuItemCompat.getActionView(searchItem)
+        val context = this
+        if(searchView is SearchView) {
+            searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    when (viewPager.currentItem){
+                        0 -> pagerAdapter.recipeListFragment.filter(newText!!)
+                        1 -> pagerAdapter.collectionListFragment.filter(newText!!)
+                    }
+                    return true
+                }
+
+            })
+        }
+
         return true
     }
 

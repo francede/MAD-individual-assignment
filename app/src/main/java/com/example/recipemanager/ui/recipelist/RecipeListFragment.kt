@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +25,7 @@ class RecipeListFragment : Fragment() {
 
     private lateinit var viewModel: RecipeListViewModel
     private val recipes = arrayListOf<Recipe>()
+    private val allRecipes = arrayListOf<Recipe>()
     private lateinit var recipeAdapter: RecipeListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -56,22 +58,23 @@ class RecipeListFragment : Fragment() {
         rvRecipes.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         var scrollListener: RecyclerView.OnScrollListener? = null
-        var sortFragmentCallback: SortFragment.OnClickCallback? = null
         activity?.let{
             if(it is MainActivity){
                 scrollListener = it.scrollListener
-                sortFragmentCallback = it.sortFragmentCallback
             }
         }
 
         rvRecipes.addOnScrollListener(scrollListener!!)
 
+        sort(SortFragment.SortOption.TITLE)
     }
 
     private fun observeViewModel(){
         viewModel.recipes.observe(viewLifecycleOwner, Observer {recipes ->
             this.recipes.clear()
             this.recipes.addAll(recipes)
+            this.allRecipes.clear()
+            this.allRecipes.addAll(recipes)
             recipeAdapter.notifyDataSetChanged()
         })
     }
@@ -86,6 +89,19 @@ class RecipeListFragment : Fragment() {
             SortFragment.SortOption.LAST_UPDATED -> {
                 recipes.sortBy { it.lastUpdated }
                 recipes.reverse()
+            }
+        }
+        recipeAdapter.notifyDataSetChanged()
+    }
+
+    fun filter(filterText: String){
+        recipes.clear()
+        if(filterText.isBlank()) {
+            recipes.addAll(allRecipes)
+        }else{
+            val text = filterText.toLowerCase()
+            allRecipes.forEach{
+                if(it.title.toLowerCase().contains(text)) recipes.add(it)
             }
         }
         recipeAdapter.notifyDataSetChanged()

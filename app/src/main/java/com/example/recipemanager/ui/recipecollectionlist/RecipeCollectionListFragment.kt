@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -25,6 +26,7 @@ class RecipeCollectionListFragment : Fragment() {
 
     private lateinit var viewModel: RecipeCollectionListViewModel
     private val collections = arrayListOf<RecipeCollection>()
+    private val allCollections = arrayListOf<RecipeCollection>()
     private lateinit var collectionAdapter: RecipeCollectionListAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -36,6 +38,8 @@ class RecipeCollectionListFragment : Fragment() {
         viewModel = ViewModelProvider(this).get(RecipeCollectionListViewModel::class.java)
         initViews()
         observeViewModel()
+
+        sort(SortFragment.SortOption.TITLE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -72,6 +76,8 @@ class RecipeCollectionListFragment : Fragment() {
         viewModel.collections.observe(viewLifecycleOwner, Observer {collections ->
             this.collections.clear()
             this.collections.addAll(collections)
+            this.allCollections.clear()
+            this.allCollections.addAll(collections)
             collectionAdapter.notifyDataSetChanged()
         })
     }
@@ -81,6 +87,20 @@ class RecipeCollectionListFragment : Fragment() {
             SortFragment.SortOption.TITLE -> collections.sortBy { it.title }
             SortFragment.SortOption.CREATED -> collections.sortBy { it.created }
             SortFragment.SortOption.LAST_UPDATED -> collections.sortBy { it.lastUpdated }
+        }
+        collectionAdapter.notifyDataSetChanged()
+    }
+
+    fun filter(filterText: String){
+        collections.clear()
+        if(filterText.isBlank()) {
+            collections.addAll(allCollections)
+        }else{
+            val text = filterText.toLowerCase()
+            allCollections.forEach{
+                if(it.title.toLowerCase().contains(text)) collections.add(it)
+                Toast.makeText(context, it.title.toLowerCase().contains(text).toString(), Toast.LENGTH_SHORT).show()
+            }
         }
         collectionAdapter.notifyDataSetChanged()
     }

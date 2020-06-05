@@ -10,6 +10,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SortedList
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
 import com.example.recipemanager.ui.EDIT_RECIPE_ACTIVITY_REQUEST_CODE
@@ -81,6 +82,7 @@ class RecipeListAdapter(private val recipes: List<Recipe>,
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.item_recipe, parent, false)
