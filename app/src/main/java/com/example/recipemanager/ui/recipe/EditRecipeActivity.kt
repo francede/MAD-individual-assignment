@@ -3,9 +3,12 @@ package com.example.recipemanager.ui.recipe
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipemanager.R
 import com.example.recipemanager.model.Recipe
@@ -16,6 +19,7 @@ import java.util.*
 class EditRecipeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: EditRecipeViewModel
+    private var textChanged = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +40,19 @@ class EditRecipeActivity : AppCompatActivity() {
             etRecipeIngredients.setText(recipe.ingredients)
             etRecipeInstructions.setText(recipe.instructions)
         }
+
+        val textWatcher = object: TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                textChanged = true
+            }
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {} //Ignore
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}//Ignore
+        }
+
+        etRecipeTitle.addTextChangedListener(textWatcher)
+        etRecipeDescription.addTextChangedListener(textWatcher)
+        etRecipeIngredients.addTextChangedListener(textWatcher)
+        etRecipeInstructions.addTextChangedListener(textWatcher)
     }
 
     private fun startViewRecipeActivity(recipe: Recipe?){
@@ -76,9 +93,25 @@ class EditRecipeActivity : AppCompatActivity() {
                 }
             }
             android.R.id.home ->{
-                val recipe = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)
-                if(recipe?.recipeId != null)startViewRecipeActivity(recipe)
-                else finish()
+                fun endActivity(){
+                    val recipe = intent.getParcelableExtra<Recipe>(RECIPE_EXTRA)
+                    if(recipe?.recipeId != null)startViewRecipeActivity(recipe)
+                    else finish()
+                }
+                if(textChanged){
+                    //Ask user if changes should be discarded
+                    val popup = AlertDialog.Builder(this)
+                    popup.setTitle(R.string.discard_changes)
+                    popup.setMessage(R.string.sure_to_discard)
+                    popup.setPositiveButton(R.string.discard){ _, _ ->
+                        endActivity()
+                    }
+                    popup.setNegativeButton(R.string.cancel){ dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    popup.show()
+                }else endActivity()
+
                 true
             }
             else -> super.onOptionsItemSelected(item)

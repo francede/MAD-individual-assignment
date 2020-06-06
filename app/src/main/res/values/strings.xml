@@ -6,12 +6,17 @@
     <string name="create_collection">Create collection</string>
     <string name="select_collection">Choose collection</string>
     <string name="recipe_must_have_title">Recipe must have a title</string>
+
     <string name="give_collection_name">Give your collection a name.</string>
     <string name="new_collection">New collection +</string>
     <string name="add_to_collection">Add %s to collection</string>
     <string name="rename_collection">Rename collection</string>
+
     <string name="confirm_delete">Confirm delete</string>
     <string name="sure_to_delete">Are you sure you want to delete %s?</string>
+
+    <string name="discard_changes">Discard changes</string>
+    <string name="sure_to_discard">Are you sure you want to discard unsaved changes?</string>
 
     <string name="created">Created: %s</string>
     <string name="last_updated">Last updated: %s</string>
@@ -29,6 +34,7 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="sort">Sort</string>
+    <string name="discard">Discard</string>
 
     <string name="recipes">Recipes</string>
     <string name="collections">Collections</string>
