@@ -20,8 +20,8 @@ class RecipeRepository(context: Context) {
         return recipesDAO.getAllRecipes()
     }
 
-    suspend fun insertRecipe(recipe: Recipe){
-        recipesDAO.insertRecipe(recipe)
+    suspend fun insertRecipe(recipe: Recipe) : Long{
+        return recipesDAO.insertRecipe(recipe)
     }
 
     suspend fun deleteRecipe(recipe: Recipe){

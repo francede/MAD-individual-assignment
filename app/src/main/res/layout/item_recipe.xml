@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="24dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/tvRecipeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="24dp"
         android:text="TextView"
         android:textColor="@color/colorTextListItem"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +20,7 @@
         android:id="@+id/ivRecipeMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="24dp"
         android:tint="@color/colorTextListItem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

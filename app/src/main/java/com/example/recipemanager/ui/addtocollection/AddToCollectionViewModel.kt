@@ -22,9 +22,9 @@ class AddToCollectionViewModel(application: Application) : AndroidViewModel(appl
         collection.collectionId ?: return
         recipe.recipeId ?: return
 
-        val recipeInCollection = RecipeInCollection(recipe.recipeId, collection.collectionId)
+        val recipeInCollection = RecipeInCollection(recipe.recipeId!!, collection.collectionId!!)
         ioScope.launch {
-            if(recipeRepository.getRecipeInCollection(recipe.recipeId, collection.collectionId) == null){
+            if(recipeRepository.getRecipeInCollection(recipe.recipeId!!, collection.collectionId!!) == null){
                 recipeRepository.insertRecipeInCollection(recipeInCollection)
             }
         }

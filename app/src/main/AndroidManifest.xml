@@ -9,18 +9,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.recipecollection.ViewCollectionActivity"></activity>
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.recipecollection.ViewCollectionActivity" />
         <activity android:name=".ui.recipe.ViewRecipeActivity" />
         <activity android:name=".ui.addtocollection.AddToCollectionActivity" />
         <activity android:name=".ui.recipecollection.CreateCollectionActivity" />
         <activity android:name=".ui.recipe.EditRecipeActivity" />
-        <activity android:name=".ui.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".ui.MainActivity"></activity>
     </application>
 
 </manifest>

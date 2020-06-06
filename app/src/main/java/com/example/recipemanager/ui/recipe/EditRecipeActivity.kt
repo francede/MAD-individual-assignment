@@ -41,7 +41,7 @@ class EditRecipeActivity : AppCompatActivity() {
     private fun startViewRecipeActivity(recipe: Recipe?){
         val intent = Intent(this, ViewRecipeActivity::class.java)
         intent.putExtra(RECIPE_EXTRA, recipe)
-
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
         startActivity(intent)
     }
 
@@ -63,11 +63,11 @@ class EditRecipeActivity : AppCompatActivity() {
                         etRecipeDescription.text.toString(),
                         etRecipeIngredients.text.toString(),
                         etRecipeInstructions.text.toString(),
-                        created = oldRecipe?.created!!,
-                        recipeId = oldRecipe.recipeId
+                        created = if(oldRecipe?.created != null) oldRecipe.created else Date(),
+                        recipeId = oldRecipe?.recipeId
                     )
 
-                    if(recipe.recipeId == null) viewModel.insertRecipe(recipe)
+                    if(recipe.recipeId == null) recipe.recipeId = viewModel.insertRecipe(recipe)
                     else viewModel.updateRecipe(recipe)
 
                     startViewRecipeActivity(recipe)

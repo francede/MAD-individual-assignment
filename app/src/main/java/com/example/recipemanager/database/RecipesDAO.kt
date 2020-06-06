@@ -13,7 +13,7 @@ interface RecipesDAO {
     fun getAllRecipes(): LiveData<List<Recipe>>
 
     @Insert
-    suspend fun insertRecipe(recipe: Recipe)
+    suspend fun insertRecipe(recipe: Recipe): Long
 
     @Delete
     suspend fun deleteRecipe(recipe: Recipe)

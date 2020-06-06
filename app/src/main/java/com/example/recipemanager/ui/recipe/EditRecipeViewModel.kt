@@ -13,10 +13,12 @@ class EditRecipeViewModel(application: Application) : AndroidViewModel(applicati
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val recipeRepository = RecipeRepository(application.applicationContext)
 
-    fun insertRecipe(recipe: Recipe){
+    fun insertRecipe(recipe: Recipe) : Long?{
+        var id: Long? = null
         ioScope.launch {
-            recipeRepository.insertRecipe(recipe)
+            id = recipeRepository.insertRecipe(recipe)
         }
+        return id
     }
 
     fun updateRecipe(recipe: Recipe){

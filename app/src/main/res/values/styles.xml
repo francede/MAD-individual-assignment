@@ -5,12 +5,15 @@
         <item name="android:windowContentOverlay">@null</item>
         <item name="actionBarStyle">@style/AppTheme.ActionBarStyle</item>
         <item name="searchViewStyle">@style/AppTheme.SearchViewStyle</item>
+        <item name="colorControlNormal">@color/colorPrimaryRed</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back_red_24dp</item>
     </style>
 
     <style name="AppTheme.ActionBarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="elevation">0dp</item>
         <item name="titleTextStyle">@style/AppTheme.ActionBarStyle.TitleTextStyle</item>
         <item name="android:searchViewStyle">@style/AppTheme.SearchViewStyle</item>
+        <item name="android:colorControlNormal">@color/colorPrimaryRed</item>
     </style>
 
     <style name="AppTheme.ActionBarStyle.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">

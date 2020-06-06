@@ -13,7 +13,7 @@ data class RecipeCollection(
     var created: Date = Date(),
     var lastUpdated: Date = Date(),
     @PrimaryKey(autoGenerate = true)
-    val collectionId: Long? = null
+    var collectionId: Long? = null
 ): Parcelable {
     override fun toString(): String {
         return "$collectionId: $title"
