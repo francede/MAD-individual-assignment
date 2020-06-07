@@ -1,6 +1,7 @@
 package com.example.recipemanager.ui.addtocollection
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import com.example.recipemanager.database.RecipeRepository
 import com.example.recipemanager.model.Recipe
@@ -16,7 +17,6 @@ class AddToCollectionViewModel(application: Application) : AndroidViewModel(appl
     private val recipeRepository = RecipeRepository(application.applicationContext)
     val collections = recipeRepository.getAllCollections()
 
-
     //Inserts RecipeToCollection unless collection or recipe are not persisted or if recipeincollection already exists
     fun addRecipeToCollection(recipe: Recipe, collection: RecipeCollection){
         collection.collectionId ?: return
@@ -30,11 +30,15 @@ class AddToCollectionViewModel(application: Application) : AndroidViewModel(appl
         }
     }
 
-    fun insertCollection(collection: RecipeCollection): Long?{
-        var id: Long? = null
+    //Inserts collection and adds recipe to that collection
+    fun insertRecipeToNewCollection(recipe: Recipe, collection: RecipeCollection){
         ioScope.launch {
-            id = recipeRepository.insertCollection(collection)
+            collection.collectionId = recipeRepository.insertCollection(collection)
+            if(recipeRepository.getRecipeInCollection(recipe.recipeId!!, collection.collectionId!!) == null){
+                recipeRepository.insertRecipeInCollection(
+                    RecipeInCollection(recipe.recipeId!!, collection.collectionId!!)
+                )
+            }
         }
-        return id
     }
 }

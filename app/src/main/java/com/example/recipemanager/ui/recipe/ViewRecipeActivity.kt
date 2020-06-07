@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import com.example.recipemanager.R
@@ -25,7 +26,7 @@ class ViewRecipeActivity : AppCompatActivity() {
     }
 
     private fun initViews(){
-        recipe = intent.getParcelableExtra(RECIPE_EXTRA)
+        recipe = intent.getParcelableExtra(RECIPE_EXTRA)!!
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = recipe.title

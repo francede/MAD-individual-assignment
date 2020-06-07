@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -84,8 +85,14 @@ class EditRecipeActivity : AppCompatActivity() {
                         recipeId = oldRecipe?.recipeId
                     )
 
-                    if(recipe.recipeId == null) recipe.recipeId = viewModel.insertRecipe(recipe)
-                    else viewModel.updateRecipe(recipe)
+                    if(recipe.recipeId == null){
+                        recipe.recipeId = viewModel.insertRecipe(recipe)
+                        Toast.makeText(this, getString(R.string.created_item, recipe.title), Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        viewModel.updateRecipe(recipe)
+                        Toast.makeText(this, getString(R.string.saved_item, recipe.title), Toast.LENGTH_SHORT).show()
+                    }
 
                     startViewRecipeActivity(recipe)
 

@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -31,8 +33,7 @@ class AddToCollectionActivity : AppCompatActivity() {
         setContentView(R.layout.activity_select_collection)
 
         recipe = intent.getParcelableExtra(RECIPE_EXTRA)!!
-        addToCollectionAdapter =
-            AddToCollectionAdapter(collections, this)
+        addToCollectionAdapter = AddToCollectionAdapter(collections, this)
         viewModel = ViewModelProvider(this).get(AddToCollectionViewModel::class.java)
 
         initViews()
@@ -64,6 +65,7 @@ class AddToCollectionActivity : AppCompatActivity() {
 
     fun addToCollection(recipeCollection: RecipeCollection){
         viewModel.addRecipeToCollection(recipe, recipeCollection)
+        Toast.makeText(this, getString(R.string.added_item_to_item, recipe.title, recipeCollection.title), Toast.LENGTH_SHORT).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -72,7 +74,9 @@ class AddToCollectionActivity : AppCompatActivity() {
                 CREATE_COLLECTION_REQUEST_CODE ->{
                     val collection = data?.getParcelableExtra<RecipeCollection>(COLLECTION_EXTRA)
                     if(collection != null){
-                        viewModel.insertCollection(collection)
+                        viewModel.insertRecipeToNewCollection(recipe, collection)
+                        Toast.makeText(this, getString(R.string.added_item_to_item, recipe.title, collection.title), Toast.LENGTH_SHORT).show()
+                        finish()
                     }
                 }
             }

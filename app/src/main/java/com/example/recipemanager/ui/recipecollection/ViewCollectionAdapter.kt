@@ -1,10 +1,12 @@
 package com.example.recipemanager.ui.recipecollection
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipemanager.R
@@ -46,6 +48,7 @@ class ViewCollectionAdapter(private val recipes: List<Recipe>,
                     when(it.itemId){
                         R.id.recipe_item_remove -> {
                             viewModel.deleteRecipeInCollection(recipe.recipeId!!, collection.collectionId!!)
+                            Toast.makeText(activity, activity.getString(R.string.removed_item_from_item, recipe.title, collection.title), Toast.LENGTH_SHORT).show()
                             true
                         }
                         R.id.recipe_item_edit -> {

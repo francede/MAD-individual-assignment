@@ -51,6 +51,7 @@ class RecipeCollectionListFragment : Fragment() {
                         ?: return
                     viewModel.insertCollection(collection)
                     collectionAdapter.notifyDataSetChanged()
+                    Toast.makeText(context, getString(R.string.created_item, collection.title), Toast.LENGTH_SHORT).show()
                 }
                 else -> super.onActivityResult(requestCode, resultCode, data)
             }

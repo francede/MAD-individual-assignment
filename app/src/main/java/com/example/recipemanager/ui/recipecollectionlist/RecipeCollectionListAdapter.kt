@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +57,7 @@ class RecipeCollectionListAdapter(private val collections: List<RecipeCollection
                             popup.setPositiveButton(context.getString(R.string.rename)){ _, _ ->
                                 collection.title = popupView.etCollectionName.text.toString()
                                 viewModel.updateCollection(collection)
+                                Toast.makeText(context, context.getString(R.string.saved_item, collection.title), Toast.LENGTH_SHORT).show()
                             }
 
                             popup.setNegativeButton(context.getString(R.string.cancel)){ dialog, _ ->
@@ -72,6 +74,7 @@ class RecipeCollectionListAdapter(private val collections: List<RecipeCollection
                             builder.setMessage(context.getString(R.string.sure_to_delete, collection.title))
                             builder.setPositiveButton(context.getString(R.string.delete)){ _, _ ->
                                 viewModel.deleteCollection(collection)
+                                Toast.makeText(context, context.getString(R.string.deleted_item, collection.title), Toast.LENGTH_SHORT).show()
                             }
                             builder.setNegativeButton(context.getString(R.string.cancel)){ dialog, _ ->
                                 dialog.dismiss()

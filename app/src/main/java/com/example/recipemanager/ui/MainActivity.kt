@@ -145,7 +145,6 @@ class MainActivity : AppCompatActivity(){
 
         val searchItem = menu?.findItem(R.id.search)
         val searchView = MenuItemCompat.getActionView(searchItem)
-        val context = this
         if(searchView is SearchView) {
             searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String?): Boolean {

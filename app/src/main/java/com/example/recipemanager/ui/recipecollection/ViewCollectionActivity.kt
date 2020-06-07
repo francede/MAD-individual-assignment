@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -79,6 +80,7 @@ class ViewCollectionActivity : AppCompatActivity() {
                     collection.title = popupView.etCollectionName.text.toString()
                     viewModel.updateCollection(collection)
                     supportActionBar?.title = collection.title
+                    Toast.makeText(this, getString(R.string.saved_item, collection.title), Toast.LENGTH_SHORT).show()
                 }
 
                 popup.setNegativeButton(getString(R.string.cancel)){ dialog, _ ->

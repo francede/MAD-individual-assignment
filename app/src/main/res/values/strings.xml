@@ -21,6 +21,12 @@
     <string name="created">Created: %s</string>
     <string name="last_updated">Last updated: %s</string>
 
+    <string name="added_item_to_item">Added %1$s to %2$s.</string>
+    <string name="created_item">Created %s</string>
+    <string name="saved_item">Saved %s</string>
+    <string name="deleted_item">Deleted %s</string>
+    <string name="removed_item_from_item">Removed %1$s from %2$s</string>
+
 
     <!-- Single words -->
     <string name="title">Title</string>

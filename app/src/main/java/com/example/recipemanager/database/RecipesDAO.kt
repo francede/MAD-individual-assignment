@@ -13,7 +13,7 @@ interface RecipesDAO {
     fun getAllRecipes(): LiveData<List<Recipe>>
 
     @Insert
-    suspend fun insertRecipe(recipe: Recipe): Long
+    fun insertRecipe(recipe: Recipe): Long
 
     @Delete
     suspend fun deleteRecipe(recipe: Recipe)
@@ -29,7 +29,7 @@ interface RecipesDAO {
     fun getCollection(collectionId: Long): LiveData<RecipeCollection>
 
     @Insert
-    suspend fun insertCollection(collection: RecipeCollection): Long
+    fun insertCollection(collection: RecipeCollection): Long
 
     @Delete
     suspend fun deleteCollection(collection: RecipeCollection)

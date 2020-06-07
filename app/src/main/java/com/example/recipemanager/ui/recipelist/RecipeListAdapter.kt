@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -68,6 +69,7 @@ class RecipeListAdapter(private val recipes: List<Recipe>,
                             builder.setMessage(context.getString(R.string.sure_to_delete, recipe.title))
                             builder.setPositiveButton(context.getString(R.string.delete)){ _, _ ->
                                 viewModel.deleteRecipe(recipe)
+                                Toast.makeText(context, context.getString(R.string.deleted_item, recipe.title), Toast.LENGTH_SHORT).show()
                             }
                             builder.setNegativeButton(context.getString(R.string.cancel)){ dialog, _ ->
                                 dialog.dismiss()
